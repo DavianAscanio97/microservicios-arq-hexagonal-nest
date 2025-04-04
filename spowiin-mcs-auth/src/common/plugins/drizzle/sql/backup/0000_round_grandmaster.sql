@@ -1,0 +1,20 @@
+CREATE TABLE "credentials" (
+	"id" text PRIMARY KEY DEFAULT uuid_generate_v4() NOT NULL,
+	"user_id" text NOT NULL,
+	"password_hash" text NOT NULL,
+	"auth_provider" varchar(50) DEFAULT 'email',
+	"role" varchar(50) DEFAULT 'user',
+	"email_verified_at" timestamp DEFAULT null,
+	"phone_verified_at" timestamp DEFAULT null,
+	"failed_login_attempts" integer DEFAULT 0,
+	"locked_until" timestamp DEFAULT null,
+	"last_activity_at" timestamp DEFAULT now(),
+	"is_active" boolean DEFAULT true,
+	"is_blocked" boolean DEFAULT false,
+	"is_verified" boolean DEFAULT false,
+	"is_subscribed" boolean DEFAULT false,
+	"created_at" timestamp DEFAULT now(),
+	"updated_at" timestamp DEFAULT now(),
+	"deleted_at" timestamp DEFAULT null,
+	CONSTRAINT "credentials_user_id_unique" UNIQUE("user_id")
+);

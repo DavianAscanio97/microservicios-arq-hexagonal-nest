@@ -5,8 +5,22 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1742168407538,
-      "tag": "0000_flat_golden_guardian",
+      "when": 1743632882255,
+      "tag": "0000_round_grandmaster",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1743634389994,
+      "tag": "0001_previous_stranger",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1743641883018,
+      "tag": "0002_slippery_blue_marvel",
       "breakpoints": true
     }
   ]

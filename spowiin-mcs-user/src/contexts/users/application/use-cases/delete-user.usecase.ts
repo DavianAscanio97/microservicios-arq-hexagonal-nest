@@ -1,8 +1,8 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { UserRepository, USER_REPOSITORY_TOKEN } from "../../domain/repositories/user.repository";
+import { UserRepository, USER_REPOSITORY_TOKEN } from "../../domain/ports/user.repository";
 import { UserNotFoundException } from "../../domain/exceptions/user-not-found.exception";
 import { UserActions } from "../../domain/entities/user-actions";
-import { FindUserByIdDto } from "../dtos/find-user-by-id.dto";
+import { FindUserByIdDto } from "../../domain/dtos/find-user-by-id.dto";
 
 @Injectable()
 export class DeleteUserUseCase {
@@ -17,8 +17,6 @@ export class DeleteUserUseCase {
             throw new UserNotFoundException();
         }
         UserActions.softDelete(user);
-        UserActions.lockUntil(user, new Date());
-        UserActions.inactive(user);
         await this._userRepository.update(user);
         await this._userRepository.publishEvents(user);
         return true;

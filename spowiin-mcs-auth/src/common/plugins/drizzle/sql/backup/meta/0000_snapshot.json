@@ -1,11 +1,11 @@
 {
-  "id": "19044caa-fd23-41f2-8903-cda6a1a73c8b",
+  "id": "b4ce9066-4125-4104-a3af-3a9e5547dc3c",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
-    "public.users": {
-      "name": "users",
+    "public.credentials": {
+      "name": "credentials",
       "schema": "",
       "columns": {
         "id": {
@@ -15,57 +15,11 @@
           "notNull": true,
           "default": "uuid_generate_v4()"
         },
-        "first_name": {
-          "name": "first_name",
-          "type": "varchar(255)",
+        "user_id": {
+          "name": "user_id",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
-        },
-        "last_name": {
-          "name": "last_name",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "email": {
-          "name": "email",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "slug": {
-          "name": "slug",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "phone_number": {
-          "name": "phone_number",
-          "type": "varchar(20)",
-          "primaryKey": false,
-          "notNull": false,
-          "default": null
-        },
-        "avatar_url": {
-          "name": "avatar_url",
-          "type": "varchar(512)",
-          "primaryKey": false,
-          "notNull": false,
-          "default": null
-        },
-        "date_of_birth": {
-          "name": "date_of_birth",
-          "type": "date",
-          "primaryKey": false,
-          "notNull": false,
-          "default": null
-        },
-        "gender": {
-          "name": "gender",
-          "type": "varchar(10)",
-          "primaryKey": false,
-          "notNull": false,
-          "default": null
         },
         "password_hash": {
           "name": "password_hash",
@@ -176,25 +130,11 @@
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
-        "users_email_unique": {
-          "name": "users_email_unique",
+        "credentials_user_id_unique": {
+          "name": "credentials_user_id_unique",
           "nullsNotDistinct": false,
           "columns": [
-            "email"
-          ]
-        },
-        "users_slug_unique": {
-          "name": "users_slug_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "slug"
-          ]
-        },
-        "users_phone_number_unique": {
-          "name": "users_phone_number_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "phone_number"
+            "user_id"
           ]
         }
       },

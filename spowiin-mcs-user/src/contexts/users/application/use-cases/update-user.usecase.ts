@@ -1,9 +1,9 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { UserRepository, USER_REPOSITORY_TOKEN } from "../../domain/repositories/user.repository";
+import { UserRepository, USER_REPOSITORY_TOKEN } from "../../domain/ports/user.repository";
 
-import { UpdateUserDto } from "../dtos/update-user.dto";
+import { UpdateUserDto } from "../../domain/dtos/update-user.dto";
 import { UserNotFoundException } from "../../domain/exceptions/user-not-found.exception";
-import { UserResponseDto } from "../dtos/user-response.dto";
+import { UserResponseDto } from "../../domain/dtos/user-response.dto";
 import { User } from "../../domain/entities/user.entity";
 import { UserActions } from "../../domain/entities/user-actions";
 import { FirstName } from '../../domain/value-objects/firstname.vo';
@@ -23,12 +23,6 @@ export class UpdateUserUseCase {
         if (!user) {
             throw new UserNotFoundException();
         }
-        // 🔹 Verificamos si el usuario está inactivo
-        UserActions.checkInactiveUser(user);
-
-        // 🔹 Verificamos si el usuario está bloqueado
-        UserActions.checkBlockedUser(user);
-
         // 🔹 Actualizamos el usuario
         UserActions.update(user, {
             firstName: new FirstName(updateUserDto.firstName) ?? user.firstName,
@@ -37,12 +31,6 @@ export class UpdateUserUseCase {
             dateOfBirth: updateUserDto.dateOfBirth ?? user.dateOfBirth,
             phoneNumber: updateUserDto.phoneNumber ?? user.phoneNumber
         });
-
-        // Actualizamos última actividad
-        UserActions.updateLastActivity(user);
-
-        // Actualizamos última modificación
-        UserActions.updateLastModification(user);
 
         // 📌 Persistimos los cambios en la base de datos
         await this._userRepository.update(user);

@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { AuthModule } from './contexts/auth/auth.module';
+import { CredentialModule } from './contexts/auth/credential.module';
 
 @Module({
-  imports: [AuthModule],
+  imports: [CredentialModule],
   controllers: [],
   providers: [],
 })

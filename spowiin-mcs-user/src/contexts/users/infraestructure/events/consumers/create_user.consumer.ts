@@ -1,12 +1,13 @@
 
 import { MessagePattern, Payload } from "@nestjs/microservices";
-import { Injectable } from "@nestjs/common";
-import { CreateUserDto } from "src/contexts/users/application/dtos/create-user.dto";
-import { UserResponseDto } from "src/contexts/users/application/dtos/user-response.dto";
-import { UserService } from "src/contexts/users/application/services/user.service";
+import { Inject, Injectable } from "@nestjs/common";
+import { CreateUserDto } from "src/contexts/users/domain/dtos/create-user.dto";
+import { UserResponseDto } from "src/contexts/users/domain/dtos/user-response.dto";
+import { USER_SERVICE, UserService } from "src/contexts/users/domain/ports/user.services";
 @Injectable()
 export class CreateUserConsumer {
-    constructor(private readonly userService: UserService) { }
+    constructor(@Inject(USER_SERVICE)
+    private readonly userService: UserService) { }
 
     @MessagePattern({ cmd: 'create_user' })
     async createUser(@Payload() createUserDto: CreateUserDto): Promise<UserResponseDto> {

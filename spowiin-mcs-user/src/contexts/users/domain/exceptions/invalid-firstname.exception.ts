@@ -6,3 +6,4 @@ export class InvalidFirstNameException extends BadRequestException {
         this.name = "InvalidFirstNameException";
     }
 }
+
